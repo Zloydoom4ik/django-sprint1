@@ -5,7 +5,6 @@
 {% endblock %}
 {% block content %}
 <article>
-  {% include "includes/post.html" %}
-  <p>{{ post.text }}</p>
+  {% include "includes/post.html" with post=post full=True %}
 </article> 
 {% endblock %}

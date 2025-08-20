@@ -9,8 +9,7 @@
 {% for post in posts %}
   <article>
     {# Здесь тоже можно вывести пост через отдельный шаблон #}
-    {% include "includes/post.html" %} 
-    <p>{{ post.text|truncatewords:10 }}</p>
+    {% include "includes/post.html" with post=post full=False %}
     <a href="{% url 'blog:post_detail' post.id %}">Читать полный текст</a>
   </article>
   <hr>

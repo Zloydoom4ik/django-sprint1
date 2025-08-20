@@ -45,6 +45,8 @@ posts: list[dict] = [
     },
 ]
 
+posts_by_id: dict[int, dict] = {post["id"]: post for post in posts}
+
 
 def index(request):
     context = {
@@ -54,11 +56,11 @@ def index(request):
 
 
 def post_detail(request, post_id):
-    for post in posts:
-        if post["id"] == post_id:
-            context = {"post": post}
-            return render(request, 'blog/detail.html', context)
-    raise Http404("Пост не найден")
+    post = posts_by_id.get(post_id)  # быстрый поиск
+    if post is None:
+        raise Http404("Пост не найден")
+    context = {"post": post}
+    return render(request, "blog/detail.html", context)
 
 
 def category_posts(request, category_slug):

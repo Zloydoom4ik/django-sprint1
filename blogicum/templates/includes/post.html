@@ -1,5 +1,10 @@
  <ul>
-    <li>Место: {{ post.location }}</li>
-    <li>Дата: {{ post.date }}</li>
-    <li>Категория: <a href="{% url 'blog:category_posts' post.category %}">{{ post.category }}</a></li>
-  </ul>
+  <li>Место: {{ post.location }}</li>
+  <li>Дата: {{ post.date }}</li>
+  <li>Категория: <a href="{% url 'blog:category_posts' post.category %}">{{ post.category }}</a></li>
+  {% if full %}
+    <p>{{ post.text|linebreaks }}</p>
+  {% else %}
+    <p>{{ post.text|truncatewords:10 }}</p>
+  {% endif %}
+</ul>
